@@ -31,7 +31,11 @@ then start the development environment
 yarn start
 ```
 
-finaly hit 
+### Install Expo
+
+[![Google Play Store](https://d30j33t1r58ioz.cloudfront.net/static/download-google.png?18cefa5d466953366addb52c6d537ca6)](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)[![Apple App Store](https://d30j33t1r58ioz.cloudfront.net/static/download-apple.png?18cefa5d466953366addb52c6d537ca6)](https://itunes.apple.com/app/apple-store/id982107779?ct=www&mt=8)
+
+### Run
 
 ```
 Run the expo app and scan the QR code
