@@ -16,6 +16,7 @@ class AddCardScreen extends Component {
       title: `Add Card in ${title}`,
       headerRight: (
         <Button
+          style={{ marginRight: 10 }}
           onPress={() => onRightButtonPress()}
           disabled={!valid}
           transparent
