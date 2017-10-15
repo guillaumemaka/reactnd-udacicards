@@ -43,4 +43,5 @@ Run the expo app and scan the QR code
 * [Redux](http://redux.js.org/) - Redux is a predictable state container for JavaScript apps.
 * [react-router](https://github.com/ReactTraining/react-router) - Frontend routing.
 * [react-redux](https://github.com/reactjs/react-redux) - Official React bindings for Redux. Performant and flexible.
+* [native-base](https://nativebase.io/) - Get truly native look and feel with platform specific design for Android and iOS over the same JavaScript code-base using NativeBase.
 
