@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
-import { Platform, Keyboard } from 'react-native'
+import { Alert, Platform, Keyboard } from 'react-native'
 import {
   Button,
   Form,
@@ -15,7 +15,8 @@ import {
   Title,
   Body,
   Text,
-  View
+  View,
+  Icon
 } from 'native-base'
 import { globalStyles, iconSizes } from '../utils/helpers'
 import { connect } from 'react-redux'
@@ -23,15 +24,16 @@ import { tintColor, primary, inactiveTintColor } from '../utils/colors'
 import * as actions from '../actions'
 
 export class NewDeckScreen extends Component {
-  state = { title: '' }
+  state = { title: '', error: '' }
 
   renderButton() {
+    const valid = !this.state.title || this.state.error === ''
     if (Platform.OS === 'android') {
       return (
         <MaterialCommunityIcons
           name="check"
           size={32}
-          color={this.state.title ? tintColor : inactiveTintColor}
+          color={valid ? tintColor : inactiveTintColor}
         />
       )
     }
@@ -40,7 +42,7 @@ export class NewDeckScreen extends Component {
       <Ionicons
         name="ios-checkmark"
         size={52}
-        color={this.state.title ? tintColor : inactiveTintColor}
+        color={valid ? tintColor : inactiveTintColor}
       />
     )
   }
@@ -52,11 +54,24 @@ export class NewDeckScreen extends Component {
     this.props.navigation.navigate('Home')
   }
 
-  onTitleChange = title => {
-    this.setState({ title })
+  onTitleChange = text => {
+    let title = text.trim()
+    const exist =
+      Object.keys(this.props.decks)
+        .map(s => s.toLowerCase())
+        .indexOf(title.toLowerCase()) !== -1
+    if (exist) {
+      this.setState({ title: text, error: 'This Deck already exist!' })
+    } else {
+      this.setState({ title: text, error: '' })
+    }
   }
 
   render() {
+    const { error } = this.state
+    if (error) {
+      Alert.alert('Invalid Deck Name', error)
+    }
     return (
       <Container>
         <Header style={{ backgroundColor: primary }}>
@@ -68,7 +83,7 @@ export class NewDeckScreen extends Component {
           </Body>
           <Right>
             <Button
-              disabled={!this.state.title}
+              disabled={!this.state.title || error != ''}
               onPress={this.saveDeck}
               transparent
             >
@@ -77,13 +92,14 @@ export class NewDeckScreen extends Component {
           </Right>
         </Header>
         <Content>
-          <Form>
-            <Item floatingLabel>
-              <Label style={{ fontSize: 20 }}>Deck Title</Label>
+          <Form style={{ marginTop: 30 }}>
+            <Item error={error !== ''}>
               <Input
+                placeholder="Deck Title"
                 value={this.state.title}
                 onChangeText={this.onTitleChange}
               />
+              {error !== '' && <Icon name="close-circle" />}
             </Item>
           </Form>
         </Content>
@@ -92,4 +108,8 @@ export class NewDeckScreen extends Component {
   }
 }
 
-export default connect(null, actions)(NewDeckScreen)
+function mapStateToProps({ decks }) {
+  return { decks }
+}
+
+export default connect(mapStateToProps, actions)(NewDeckScreen)
