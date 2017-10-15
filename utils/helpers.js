@@ -60,7 +60,6 @@ export async function getDecks() {
 
     return JSON.parse(data)
   } catch (error) {
-    console.error(error)
     return DEFAULT_DATA
   }
 }
@@ -78,7 +77,7 @@ export async function getDeck(id) {
 export async function saveDeckTitle(title) {
   let decks = await getDecks()
   decks = { ...decks, [title]: { title, questions: [] } }
-  console.log({ decks })
+
   await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
 }
 

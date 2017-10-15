@@ -32,8 +32,6 @@ export class QuizzScreen extends Component {
       currentQuestion: state.currentQuestion + 1,
       showAnswer: false
     }))
-
-    console.log(this.state)
   }
 
   onIncorrectPress = e => {
@@ -41,7 +39,6 @@ export class QuizzScreen extends Component {
       currentQuestion: state.currentQuestion + 1,
       showAnswer: false
     }))
-    console.log(this.state)
   }
 
   renderQuestion = () => {

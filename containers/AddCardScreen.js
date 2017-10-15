@@ -56,7 +56,6 @@ class AddCardScreen extends Component {
   }
 
   onAddPress = () => {
-    console.log('onAddPress', { state: this.state })
     const { deckTitle, question, answer } = this.state
 
     this.props.addCardToDeck(deckTitle, { question, answer })

@@ -7,7 +7,6 @@ export const getDecks = () => async dispatch => {
     dispatch({ type: ActionsTypes.LIST_DECKS, decks })
   } catch (error) {
     dispatch({ type: ActionsTypes.LIST_DECKS, decks: {} })
-    console.error(error)
   }
 }
 

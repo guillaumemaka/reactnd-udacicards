@@ -16,7 +16,6 @@ class HomeScreen extends Component {
   onRowPress = deck => {
     const { navigation } = this.props
     navigation.navigate('Details', { title: deck.title })
-    console.log({ deck })
   }
 
   render() {
